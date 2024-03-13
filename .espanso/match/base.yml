@@ -1,0 +1,80 @@
+# espanso match file
+
+# For a complete introduction, visit the official docs at: https://espanso.org/docs/
+
+# You can use this file to define the base matches (aka snippets)
+# that will be available in every application when using espanso.
+global_vars:
+  - name: "global1"
+    type: "shell"
+    params:
+      cmd: "echo global var"
+  - name: mytime
+    type: date
+    params:
+      format: "%H:%M"
+  - name: mydate
+    type: date
+    params:
+      format: "%Y/%m/%d"
+# Matches are substitution rules: when you type the "trigger" string
+# it gets replaced by the "replace" string.
+matches:
+  # Simple text replacement
+  - trigger: ":cenz"
+    replace: "Hi there!"
+
+  # - trigger: "alh"
+  #   replace: "although"
+  #   uppercase_style: "capitalize_words"
+  #   propagate_case: true # if ALH, will all cap
+  #   word: true # full word
+
+  - trigger: ":date"
+    replace: "{{mydate}}"
+
+  - trigger: ":now"
+    replace: "{{mytime}}"
+
+  - trigger: :euro
+    replace: €
+
+  - trigger: ":gbp"
+    replace: "£"
+
+  # Print the output of a shell command
+  - trigger: ":shell"
+    replace: "{{output}}"
+    vars:
+      - name: output
+        type: shell
+        params:
+          cmd: "echo 'Hello from your shell'"
+
+  - trigger: ":quote"
+    replace: "Every moment is a fresh beginning."
+  - trigger: ":quote"
+    replace: "Everything you can imagine is real."
+  - trigger: ":quote"
+    replace: "Whatever you do, do it well."
+
+  # And much more! For more information, visit the docs: https://espanso.org/docs/
+
+  - trigger: ":file"
+    replace: "{{form1.file}}"
+    vars:
+      - name: files
+        type: shell
+        params:
+          cmd: "find ~/Documents -maxdepth 1"
+      - name: form1
+        type: form
+        params:
+          layout: |
+            Select file:
+            [[file]]
+          fields:
+            file:
+              type: list
+              values: "{{files}}"
+

@@ -1,0 +1,17 @@
+matches: 
+  - trigger: ":email"
+    replace: ""
+  - trigger: ":email"
+    replace: ""
+  - trigger: ":email"
+    replace: ""
+   
+  - trigger: ":id"
+    label: "MS ID"
+    replace: ""
+  - trigger: ":id"
+    label: "WNumber"
+    replace: ""
+  - trigger: ":id"
+    label: "WINNumber"
+    replace: ""

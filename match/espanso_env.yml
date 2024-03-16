@@ -1,0 +1,10 @@
+global_vars:
+  - name: "espanso_path"
+    type: "shell"
+    params:
+      cmd: "espanso path | grep Config | sed 's/^Config: //'"
+
+matches:
+  # Simple text replacement
+  - trigger: ":espanso_path"
+    replace: "'{{espanso_path}}'"

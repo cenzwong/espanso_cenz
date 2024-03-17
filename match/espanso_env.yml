@@ -7,4 +7,4 @@ global_vars:
 matches:
   # Simple text replacement
   - trigger: ":espanso_path"
-    replace: "'{{espanso_path}}'"
+    replace: "{{espanso_path}}"

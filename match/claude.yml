@@ -1,0 +1,28 @@
+global_vars:
+  - name: "ANTHROPIC_API_KEY"
+    type: "shell"
+    params:
+      cmd: "source '{{espanso_path}}/.env'; echo $ANTHROPIC_API_KEY"
+
+
+matches:
+  - trigger: ":claude-hello"
+    replace: "{{output}}"
+    vars:
+      - name: output
+        type: shell
+        params:
+          cmd: "
+            curl https://api.anthropic.com/v1/messages 
+                --header \"x-api-key: {{ANTHROPIC_API_KEY}}\" 
+                --header \"anthropic-version: 2023-06-01\" 
+                --header \"content-type: application/json\" 
+                --data '{
+                \"model\": \"claude-3-opus-20240229\",
+                \"max_tokens\": 1024,
+                \"messages\": [
+                    {\"role\": \"user\", \"content\": \"Hello, world\"}
+                ]
+              }'
+          "
+

@@ -1,4 +1,7 @@
 global_vars:
+  - name: "clipb"
+    type: "clipboard"
+    
   - name: "espanso_path"
     type: "shell"
     params:

@@ -1,4 +1,6 @@
 # curl https://api.anthropic.com/v1/messages --header "x-api-key: $ANTHROPIC_API_KEY" --header "anthropic-version: 2023-06-01" --header "content-type: application/json" --data '{"model": "claude-3-opus-20240229","max_tokens": 1024,"messages": [{"role": "user", "content": "Hello, world"}]}' | python -c "import json; import sys; data = json.load(sys.stdin); print(data['content'])"
+# {"id":"msg_018c49CaNTjsPHhbzczCS7He","type":"message","role":"assistant","content":[{"type":"text","text":"Hello! How can I assist you today?"}],"model":"claude-3-opus-20240229","stop_reason":"end_turn","stop_sequence":null,"usage":{"input_tokens":10,"output_tokens":12}}
+
 
 global_vars:
   - name: "ANTHROPIC_API_KEY"
@@ -6,8 +8,10 @@ global_vars:
     params:
       cmd: "source '{{espanso_path}}/.env'; echo $ANTHROPIC_API_KEY"
 
-  - name: "clipb"
-    type: "clipboard"
+  - name: "ANTHROPIC_MODEL"
+    type: "echo"
+    params:
+      echo: "claude-3-haiku-20240307"
 
   - name: "prompt_form"
     type: "form"
@@ -24,7 +28,7 @@ global_vars:
             --header \"anthropic-version: 2023-06-01\" 
             --header \"content-type: application/json\" 
             --data '{
-            \"model\": \"claude-3-haiku-20240307\",
+            \"model\": \"{{ANTHROPIC_MODEL}}\",
             \"max_tokens\": 1024,
             \"messages\": [
                 {\"role\": \"user\", \"content\": \"{{prompt_form.prompt}}\"}
@@ -49,7 +53,7 @@ matches:
                 --header \"anthropic-version: 2023-06-01\" 
                 --header \"content-type: application/json\" 
                 --data '{
-                \"model\": \"claude-3-haiku-20240307\",
+                \"model\": \"{{ANTHROPIC_MODEL}}\",
                 \"max_tokens\": 1024,
                 \"messages\": [
                     {\"role\": \"user\", \"content\": \"Hello, world\"}
@@ -69,7 +73,7 @@ matches:
                 --header \"anthropic-version: 2023-06-01\" 
                 --header \"content-type: application/json\" 
                 --data '{
-                \"model\": \"claude-3-haiku-20240307\",
+                \"model\": \"{{ANTHROPIC_MODEL}}\",
                 \"max_tokens\": 1024,
                 \"system\": \"I want you to act as an English translator, spelling corrector and improver. I will speak to you in any language and you will detect the language, translate it and answer in the corrected and improved version of my text, in English. I want you to replace my simplified A0-level words and sentences with more beautiful and elegant, upper level English words and sentences. Keep the meaning same, but make them more literary. I want you to only reply the correction, the improvements and nothing else, do not write explanations. \",
                 \"messages\": [
@@ -77,5 +81,3 @@ matches:
                 ]
               }' | jq '.content[].text' | tr -d \'\"\'
           "
-
-# {"id":"msg_018c49CaNTjsPHhbzczCS7He","type":"message","role":"assistant","content":[{"type":"text","text":"Hello! How can I assist you today?"}],"model":"claude-3-opus-20240229","stop_reason":"end_turn","stop_sequence":null,"usage":{"input_tokens":10,"output_tokens":12}}

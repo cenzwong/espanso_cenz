@@ -24,5 +24,7 @@ ANTHROPIC_API_KEY="sk-ant-api03--"
 `:claude:` : This would pop up a formm ask you to type your prompt. This is good to asked generic question/ brain storming
 `:claude-grammar` : This will read the sentence you stored in the clipbaord and help you to rewrite to make it look nicer.
 
+> Using claude would incur cost
+
 # Debug with espanso
 You could run `espanso log` to see the output of the cmd

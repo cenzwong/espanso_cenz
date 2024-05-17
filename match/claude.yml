@@ -18,6 +18,9 @@ global_vars:
     params:
       layout: |
         [[prompt]]
+      form_fields:
+        text:
+          multiline: true
 
   - name: "generic_llm"
     type: "shell"
@@ -81,3 +84,4 @@ matches:
                 ]
               }' | jq '.content[].text' | tr -d \'\"\'
           "
+
